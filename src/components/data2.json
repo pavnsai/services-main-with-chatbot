@@ -1,0 +1,83 @@
+[
+ 
+    {
+      "userName": "pavansai",
+      "createdAt": "2022-11-29",
+      "id": "1669711705422",
+      "jsonData": {
+        "fastDelivery": true,
+        "ratings": 3,
+        "image": "http://placeimg.com/640/480/people",
+        "inStock": 6,
+        "price": "150",
+        "id": "12354-dhdfj-fd",
+        "name": "user-77",
+        "typeOfService": "Electronic Repair",
+        "qty": 1
+      }
+    },
+    {
+      "userName": "pavansai",
+      "createdAt": "2022-11-29",
+      "id": "8266ed10-6fc4-11ed-b1ef-03c4148ff486",
+      "jsonData": {
+        "fastDelivery": true,
+        "ratings": 4,
+        "image": "http://placeimg.com/640/480/people",
+        "inStock": 6,
+        "price": "125",
+        "id": "123-dhdfdfj-fd",
+        "name": "user-2",
+        "typeOfService": "Electronic Repair",
+        "qty": 1
+      }
+    },
+    {
+      "userName": "pavansai",
+      "createdAt": "2022-11-29",
+      "id": "8266ed11-6fc4-11ed-b1ef-03c4148ff486",
+      "jsonData": {
+        "fastDelivery": true,
+        "ratings": 3,
+        "image": "http://placeimg.com/640/480/people",
+        "inStock": 6,
+        "price": "150",
+        "id": "12354-dhdfj-fd",
+        "name": "user-77",
+        "typeOfService": "Electronic Repair",
+        "qty": 1
+      }
+    },
+    {
+      "userName": "pavansai",
+      "createdAt": "2022-11-29",
+      "id": "e150fb00-6fc3-11ed-b794-6ba0f788bcec",
+      "jsonData": {
+        "fastDelivery": true,
+        "ratings": 4,
+        "image": "http://placeimg.com/640/480/people",
+        "inStock": 6,
+        "price": "125",
+        "id": "123-dhdfdfj-fd",
+        "name": "user-2",
+        "typeOfService": "Electronic Repair",
+        "qty": 1
+      }
+    },
+    {
+      "userName": "pavansai",
+      "createdAt": "2022-11-29",
+      "id": "e150fb01-6fc3-11ed-b794-6ba0f788bcec",
+      "jsonData": {
+        "fastDelivery": true,
+        "ratings": 3,
+        "image": "http://placeimg.com/640/480/people",
+        "inStock": 6,
+        "price": "150",
+        "id": "12354-dhdfj-fd",
+        "name": "user-77",
+        "typeOfService": "Electronic Repair",
+        "qty": 1
+      }
+    }
+  ]

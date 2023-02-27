@@ -1,0 +1,53 @@
+{
+  "auth": {
+    "servicesreactaf59f799": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
+    }
+  },
+  "interactions": {
+    "freelancebot": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lex"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_interactions_freelancebot_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "interactions",
+          "resourceName": "freelancebot"
+        }
+      ]
+    },
+    "AMPLIFY_interactions_freelancebot_s3Key": {
+      "usedBy": [
+        {
+          "category": "interactions",
+          "resourceName": "freelancebot"
+        }
+      ]
+    }
+  }
+}
