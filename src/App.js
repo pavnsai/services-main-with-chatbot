@@ -1,11 +1,10 @@
 import './App.css';
-import Header from './components/Header';
+import Header from './components/Header/Header';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Cart from './components/Cart';
 import ServicePage from './components/ServicePage';
 import React from 'react';
-import { withAuthenticator, Button, Heading } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import awsconfig from './aws-exports';
 import { Amplify, Auth, API, graphqlOperation } from 'aws-amplify';
@@ -39,7 +38,6 @@ function App() {
                 <Route path="/login">
                     <DummySignInPage />
                 </Route>
-                {/* <ChatbotButton /> */}
                 <ChatbotButton />
             </div>
         </BrowserRouter>

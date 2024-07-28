@@ -33,7 +33,7 @@ const Orders = () => {
     async function fetchData(user) {
       await axios
         .post(
-          "https://thucsi4ibdq7iqsbulp7fhbexu0dmaah.lambda-url.us-east-1.on.aws/",
+          "https://dl7cp34t47khween7itdmwukjm0makzp.lambda-url.us-east-1.on.aws/",
           { request: "pastdata", userName: user }
         )
         .then(

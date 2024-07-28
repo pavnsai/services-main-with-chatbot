@@ -1,6 +1,6 @@
 export type AmplifyDependentResourcesAttributes = {
   "auth": {
-    "servicesreactaf59f799": {
+    "amplifyapp4ae0a245": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
       "IdentityPoolId": "string",
@@ -11,7 +11,7 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "interactions": {
-    "freelancebot": {
+    "amplifylex": {
       "BotName": "string",
       "FunctionArn": "string",
       "Region": "string"

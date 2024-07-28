@@ -1,21 +1,18 @@
-import { FaShoppingCart, FaSignInAlt } from 'react-icons/fa';
-import { FcSelfServiceKiosk, FcFlowChart } from 'react-icons/fc';
-import { AiFillDelete, AiTwotoneHome } from 'react-icons/ai';
-import { SiFreelancer } from 'react-icons/si';
-import { RiLogoutCircleRFill } from 'react-icons/ri';
+import { FaShoppingCart } from 'react-icons/fa';
+import { AiFillDelete } from 'react-icons/ai';
+import { BsFillCloudDownloadFill } from 'react-icons/bs';
 import {
     Badge,
     Button,
     Container,
     Dropdown,
-    Form,
     FormControl,
     Nav,
     Navbar,
 } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
-import { CartState } from '../context/Context';
-import './styles.css';
+import { CartState } from '../../context/Context';
+import './Header.css';
 import { Auth } from 'aws-amplify';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -58,7 +55,7 @@ const Header = () => {
         <Navbar bg="dark" variant="dark" style={{ height: 80 }}>
             <Container>
                 <Navbar.Brand>
-                    <SiFreelancer color="#7cfc00" fontSize="50px" />{' '}
+                    <BsFillCloudDownloadFill color="#7cfc00" fontSize="40px"  />
                     <Link to="/">
                         <span
                             style={{
@@ -66,10 +63,10 @@ const Header = () => {
                                 fontWeight: 600,
                                 fontSize: '25px',
                                 color: '#7cfc00',
-                                marginLeft: '10px',
+                                marginLeft: '10px'
                             }}
                         >
-                            Easyfreelancemarket
+                            Freelancepromarket
                         </span>
                     </Link>
                 </Navbar.Brand>
@@ -125,7 +122,6 @@ const Header = () => {
                                 >
                                     Login
                                 </Button>
-                                {/* <FaSignInAlt color="white" fontSize="40px" /> Login */}
                             </div>
                         </Link>
                     )}

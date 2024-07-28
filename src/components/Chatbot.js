@@ -16,7 +16,7 @@ function Chatbotfunction(props) {
         if (!inputText.trim()) return;
 
         // Send the user's input text to Amazon Lex
-        const response = await Interactions.send('BookFreelancer', inputText);
+        const response = await Interactions.send('OrderFlowers_dev', inputText);
 
         // Add the response message to the chat
         setMessages((prevMessages) => [
