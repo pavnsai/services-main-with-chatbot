@@ -7,7 +7,7 @@ import Services from './components/Services/Services';
 import React from 'react';
 import '@aws-amplify/ui-react/styles.css';
 import awsconfig from './aws-exports';
-import {Amplify, Auth, API, graphqlOperation} from 'aws-amplify';
+import {Amplify} from 'aws-amplify';
 import CheckOut from './components/Checkout/CheckOut';
 import DummySignInPage from './components/DummySignInPage';
 import Orders from './components/Orders/Orders';

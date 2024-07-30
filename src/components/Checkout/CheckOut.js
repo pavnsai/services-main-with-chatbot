@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { withAuthenticator, Button, Heading } from "@aws-amplify/ui-react";
+import { withAuthenticator, Heading } from "@aws-amplify/ui-react";
 import { CartState } from "../../context/Context";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
@@ -8,9 +8,8 @@ import { Auth } from "aws-amplify";
 
 const CheckOut = () => {
   const {
-    state: { cart, isLogin, userName },
+    state: { cart },
     dispatch,
-    productDispatch,
   } = CartState();
   const history = useHistory();
 const [loading, setLoading] = useState(true);

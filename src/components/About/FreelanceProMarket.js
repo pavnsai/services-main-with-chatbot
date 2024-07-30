@@ -169,7 +169,7 @@ const FreelanceProMarket = () => {
                 </div>
                 <div className="architecture-content">
                     <div className="architecture-image-container">
-                        <div class="architecture-image-wrapper">
+                        <div className="architecture-image-wrapper">
                             <img src="FreelanceProMarket.png" alt="Architecture Diagram"
                                  className="architecture-image"/>
                         </div>
@@ -179,7 +179,7 @@ const FreelanceProMarket = () => {
                             {
                                 icon: FaBriefcase,
                                 title: "Client-Side",
-                                description: "Our platform features a dynamic and responsive user interface built with React.js, ensuring a seamless and interactive user experience."
+                                description: "Built with React.js, our platform ensures dynamic and responsive user interfaces, enhanced by Amazon CloudFront for fast content delivery from anywhere in the world."
                             },
                             {
                                 icon: FaServer,
@@ -208,8 +208,9 @@ const FreelanceProMarket = () => {
                             }
                         ].map((item, index) => (
                             <div key={index} className="architecture-card">
-                                <item.icon className="arch-icon"/>
-                                <h3>{item.title}</h3>
+                                {/*<item.icon className="arch-icon"/>*/}
+                                <h3><item.icon className="arch-icon"/>
+                                    {item.title}</h3>
                                 <p>{item.description}</p>
                             </div>
                         ))}

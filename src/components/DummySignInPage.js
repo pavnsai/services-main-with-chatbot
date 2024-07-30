@@ -1,15 +1,13 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { withAuthenticator, Button, Heading } from "@aws-amplify/ui-react";
+import { withAuthenticator } from "@aws-amplify/ui-react";
 import { CartState } from "../context/Context";
 import { Auth } from "aws-amplify";
 import { Spinner } from "react-bootstrap";
 
 const DummySignInPage = () => {
   const {
-    state: { cart, isLogin },
     dispatch,
-    productDispatch,
   } = CartState();
   const history = useHistory();
   useEffect(() => {
@@ -46,7 +44,7 @@ const DummySignInPage = () => {
             userName: "",
           },
         });
-        console.log(err);
+        console.error(err);
       });
   }, []);
 

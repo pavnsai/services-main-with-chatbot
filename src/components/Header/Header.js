@@ -42,7 +42,7 @@ const Header = () => {
             dispatch({ type: 'CHANGE_USERNAME', payload: { userName: '' } });
             history.push('/');
         } catch (error) {
-            console.log('error signing out: ', error);
+            console.error('error signing out: ', error);
         }
     }
 

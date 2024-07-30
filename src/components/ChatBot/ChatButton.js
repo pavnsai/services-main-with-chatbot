@@ -15,12 +15,12 @@ function ChatButton() {
 
     return (
         <div>
+            <i className="fas fa-eye"></i>
+            <i className="fas fa-eye"></i>
             <button className="chat-button" onClick={handleClick}>
-                <i class="fas fa-eye"></i>
-                <i class="fas fa-eye"></i>
                 <span> Got a question? Ask us</span>
             </button>
-            {isOpen && <ChatModal onClose={handleClose} />}
+            {isOpen && <ChatModal onClose={handleClose}/>}
         </div>
     );
 }

@@ -29,7 +29,7 @@ const Cart = () => {
             .catch((err) => {
                 dispatch({ type: 'CHANGE_LOGIN', payload: { state: false } });
                 dispatch({ type: 'CHANGE_USERNAME', payload: { userName: '' } });
-                console.log(err);
+                console.error(err);
             });
     }, [dispatch]);
 

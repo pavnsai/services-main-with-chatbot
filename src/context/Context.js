@@ -31,7 +31,7 @@ const Context = ({ children }) => {
                         });
                     },
                     (error) => {
-                        console.log(error);
+                        console.error(error);
                     }
                 );
         }
@@ -67,7 +67,7 @@ const Context = ({ children }) => {
                         userName: '',
                     },
                 });
-                console.log(err);
+                console.error(err);
             });
     }, []);
 

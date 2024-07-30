@@ -1,4 +1,4 @@
-import { Card, Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { CartState } from "../../context/Context";
 import Rating from "../Rating/Rating";
 import "./SingleProduct.scss";
@@ -13,7 +13,6 @@ const SingleProduct = ({ prod, onClickFunction }) => {
       <Card className="single-product">
         <div className="product-image" onClick={() => onClickFunction(prod)}>
           <img
-              className="rounded-circle"
               alt={prod.name}
               src={prod.image}
           />
@@ -30,7 +29,8 @@ const SingleProduct = ({ prod, onClickFunction }) => {
             <Rating rating={prod.ratings} onClick={(i) => {}} />
           </Card.Subtitle>
           {cart.some((p) => p.id === prod.id) ? (
-              <Button
+              <button
+                  className="single-product-btn remove"
                   variant="danger"
                   onClick={() =>
                       dispatch({
@@ -40,9 +40,10 @@ const SingleProduct = ({ prod, onClickFunction }) => {
                   }
               >
                 Remove from Cart
-              </Button>
+              </button>
           ) : (
-              <Button
+              <button
+                  className="single-product-btn add"
                   onClick={() =>
                       dispatch({
                         type: "ADD_TO_CART",
@@ -52,7 +53,7 @@ const SingleProduct = ({ prod, onClickFunction }) => {
                   disabled={!prod.inStock}
               >
                 {!prod.inStock ? "Out of Stock" : "Add to Cart"}
-              </Button>
+              </button>
           )}
         </Card.Body>
       </Card>

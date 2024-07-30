@@ -1,8 +1,8 @@
 import { CartState } from '../../context/Context';
 import Filters from '../Filters/Filters';
 import SingleProduct from '../Professionals/SingleProduct';
-import { useHistory, useLocation } from 'react-router-dom';
-import Modal from '../Modal/Model';
+import {  useLocation } from 'react-router-dom';
+import Modal from '../Modal/ProfessionalModal';
 import { useState } from 'react';
 import './Home.scss';
 
@@ -73,9 +73,9 @@ const Home = () => {
                     </div>
                     {modalOpen && (
                         <Modal
-                            status={modalOpen}
-                            handleClick={handleClickfromModal}
-                            prod={modalData}
+                            show={modalOpen}
+                            handleClose={handleClickfromModal}
+                            professional={modalData}
                         />
                     )}
                 </main>

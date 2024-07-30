@@ -10,7 +10,6 @@ import './Orders.css'
 
 const Orders = () => {
     const {
-        state: { cart },
         dispatch,
     } = CartState();
     const [data, setData] = useState([]);
@@ -27,7 +26,7 @@ const Orders = () => {
                 setData(res.data.pastData);
                 setSpinner(false);
             } catch (error) {
-                console.log(error);
+                console.error(error);
                 setSpinner(false);
             }
         }
@@ -41,7 +40,7 @@ const Orders = () => {
             .catch((err) => {
                 dispatch({ type: "CHANGE_LOGIN", payload: { state: false } });
                 dispatch({ type: "CHANGE_USERNAME", payload: { userName: "" } });
-                console.log(err);
+                console.error(err);
                 setSpinner(false);
             });
     }, [dispatch]);

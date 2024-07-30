@@ -1,7 +1,7 @@
 
 .header-navbar {
-  //background-color: white;
-  background-color: #343a40;
+  background-color: white;
+  //background-color: #343a40;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 0.75rem 0;
   position: relative;
@@ -26,7 +26,7 @@
 }
 
 .navbar-nav .nav-link {
-  color: white !important;
+  color: black !important;
   //color: rgba(255, 255, 255, 0.8);
   transition: color 0.3s ease;
   font-size: 20px;
@@ -83,10 +83,11 @@
   max-width: 300px;
   margin-right: 1rem;
   border: 1px solid #007bff;
+  border-radius: 3px !important;
   padding: 0.6rem 1.2rem;
   transition: all 0.3s ease;
-  background-color: rgba(255, 255, 255, 0.1) !important;
-  color: #fff !important;
+  background-color: #bdccdd;
+  //color: #fff !important;
 }
 
 .search-input:focus {
@@ -95,7 +96,7 @@
 }
 
 .search-input::placeholder {
-  color: rgba(255, 255, 255, 0.6) !important;
+  //color: rgba(255, 255, 255, 0.6) !important;
 }
 
 .btn-outline-danger,
@@ -227,16 +228,18 @@
 @media (max-width: 992px) {
   .header-navbar .search-input {
     margin-bottom: 1rem;
-    width: 100%;
+    width: 60%;
     max-width: 100%;
     margin-left: 0;
     margin-right: 0;
   }
-
   .navbar-nav.ms-auto {
     margin-left: 0 !important;
   }
-
+  .navbar-nav .nav-link {
+    transition: color 0.3s ease;
+    font-size: 18px;
+  }
   .cart-dropdown {
     margin-left: 0;
   }

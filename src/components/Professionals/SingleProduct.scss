@@ -32,7 +32,7 @@
 }
 
 .product-name {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: bold;
     margin-bottom: 0.5rem;
     cursor: pointer;
@@ -47,7 +47,7 @@
 }
 
 .product-price {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: bold;
     color: #4caf50;
 }
@@ -57,9 +57,93 @@
     flex-direction: column;
     justify-content: space-between;
     flex-grow: 1;
+    padding: 0.75rem;
 }
 
-.btn {
+.single-product-btn {
     width: 100%;
     margin-top: 10px;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.single-product-btn.add {
+    background-color: #007bff;
+    color: white;
+}
+
+.single-product-btn.add:hover {
+    background-color: #0056b3;
+}
+
+.single-product-btn.remove {
+    background-color: #dc3545;
+    color: white;
+}
+
+.single-product-btn.remove:hover {
+    background-color: #c82333;
+}
+
+.single-product-btn:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+@media (max-width: 1200px) {
+    .product-image {
+        padding-top: 75%; // Adjust aspect ratio for smaller screens
+    }
+}
+
+@media (max-width: 992px) {
+    .product-name {
+        font-size: 0.9rem;
+    }
+
+    .product-price {
+        font-size: 1rem;
+    }
+
+    .custom-button {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .card-body {
+        padding: 0.5rem;
+    }
+
+    .product-name {
+        font-size: 0.85rem;
+    }
+
+    .product-price {
+        font-size: 0.95rem;
+    }
+
+    .product-image {
+        padding-top: 66.67%; // Further adjust aspect ratio for mobile
+    }
+}
+
+@media (max-width: 576px) {
+    .product-name {
+        font-size: 0.8rem;
+    }
+
+    .product-price {
+        font-size: 0.9rem;
+    }
+
+    .single-product-btn {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.6rem;
+    }
 }
