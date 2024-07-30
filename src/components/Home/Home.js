@@ -1,6 +1,6 @@
 import { CartState } from '../../context/Context';
 import Filters from '../Filters/Filters';
-import SingleProduct from '../Professionals/SingleProduct';
+import SingleProfessional from '../Professionals/SingleProfessional';
 import {  useLocation } from 'react-router-dom';
 import Modal from '../Modal/ProfessionalModal';
 import { useState } from 'react';
@@ -64,7 +64,7 @@ const Home = () => {
                 <main className="products-main">
                     <div className="product-grid">
                         {transformProducts().map((prod) => (
-                            <SingleProduct
+                            <SingleProfessional
                                 prod={prod}
                                 key={prod.id}
                                 onClickFunction={(data) => handleClick(data)}

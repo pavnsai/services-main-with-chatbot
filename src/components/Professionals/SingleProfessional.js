@@ -1,9 +1,9 @@
 import { Card } from "react-bootstrap";
 import { CartState } from "../../context/Context";
 import Rating from "../Rating/Rating";
-import "./SingleProduct.scss";
+import "./SingleProfessional.scss";
 
-const SingleProduct = ({ prod, onClickFunction }) => {
+const SingleProfessional = ({ prod, onClickFunction }) => {
   const {
     state: { cart },
     dispatch,
@@ -60,4 +60,4 @@ const SingleProduct = ({ prod, onClickFunction }) => {
   );
 };
 
-export default SingleProduct;
+export default SingleProfessional;

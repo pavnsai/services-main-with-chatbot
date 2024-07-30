@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTable, usePagination } from 'react-table';
-import './table.css';
+import './Table.css';
 
 const Table = ({ data, columns }) => {
     const {
