@@ -108,7 +108,7 @@ const Header = () => {
                                                 </Dropdown.Item>
                                             ))}
                                             <Dropdown.Divider/>
-                                            <Dropdown.Item as={Link} to="/cart" className="text-center">
+                                            <Dropdown.Item as={Link} onClick={() => handleNavigation()} to="/cart" className="text-center">
                                                 <Button variant="primary" block>Go To Cart</Button>
                                             </Dropdown.Item>
                                         </>

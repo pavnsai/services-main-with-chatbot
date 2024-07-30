@@ -1,0 +1,154 @@
+.chatbot-container {
+  display: flex;
+  flex-direction: column;
+  height: 600px;
+  width: 380px;
+  margin: 0 auto;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  border-radius: 25px;
+  overflow: hidden;
+  position: fixed;
+  bottom: 100px;
+  right: 30px;
+  background-color: #ffffff;
+}
+
+.chatbot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #3a86ff;
+  color: #fff;
+  height: 60px;
+  padding: 0 25px;
+  position: relative;
+}
+
+.chatbot-header h2 {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.chatbot-messages {
+  flex: 1;
+  padding: 25px;
+  overflow-y: auto;
+  background-color: #f8f9fa;
+}
+
+.message {
+  max-width: 80%;
+  margin-bottom: 15px;
+  padding: 12px 18px;
+  border-radius: 20px;
+  font-size: 15px;
+  line-height: 1.5;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.user {
+  background-color: #3a86ff;
+  color: #fff;
+  margin-left: auto;
+  border-bottom-right-radius: 5px;
+}
+
+.bot {
+  background-color: #ffffff;
+  color: #333;
+  margin-right: auto;
+  border-bottom-left-radius: 5px;
+}
+
+.chatbot-form {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: #ffffff;
+  border-top: 1px solid #e0e0e0;
+}
+
+.chatbot-input {
+  flex: 1;
+  padding: 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 25px;
+  margin-right: 15px;
+  font-size: 15px;
+  transition: border-color 0.3s ease;
+}
+
+.chatbot-input:focus {
+  outline: none;
+  border-color: #3a86ff;
+}
+
+.chatbot-submit-button {
+  background-color: #3a86ff;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgb(44, 103, 197);
+}
+
+.chatbot-submit-button:hover {
+  background-color: #2064d1;
+}
+
+@keyframes typing {
+  0% { content: '.'; }
+  33% { content: '..'; }
+  66% { content: '...'; }
+}
+
+.message.bot.loading {
+  background-color: #e0e0e0;
+  color: #666;
+  font-style: italic;
+}
+
+.message.bot.loading::after {
+  content: '.';
+  display: inline-block;
+  animation: typing 1.5s infinite;
+}
+
+.close-button {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.close-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.close-button:focus {
+  outline: none;
+}
+
+.close-button::before {
+  display: block;
+  line-height: 1;
+}

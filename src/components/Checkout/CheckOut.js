@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import { withAuthenticator, Button, Heading } from "@aws-amplify/ui-react";
-import { CartState } from "../context/Context";
+import { CartState } from "../../context/Context";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Spinner from "react-bootstrap/Spinner";
@@ -13,7 +13,8 @@ const CheckOut = () => {
     productDispatch,
   } = CartState();
   const history = useHistory();
-
+const [loading, setLoading] = useState(true);
+const [success, setSuccess] = useState(false);
   useEffect(() => {
     async function fetchData(user) {
       await axios
@@ -35,12 +36,18 @@ const CheckOut = () => {
                 modal: true,
               },
             });
-            history.push({
-              pathname: "/",
-            });
+              setLoading(false);
+              setSuccess(true);
+
+              // Delay redirection
+              setTimeout(() => {
+                  history.push("/orders");
+              }, 3000);
           },
           (error) => {
-            console.log(error);
+            console.error(error);
+              setLoading(false);
+
           }
         );
     }
@@ -75,20 +82,32 @@ const CheckOut = () => {
             userName: "",
           },
         });
-        console.log(err);
+        console.error(err);
+          setLoading(false);
+
       });
   }, []);
 
-  return (
-    <div>
-      <Spinner
-        animation="grow"
-        style={{ marginLeft: "40%", marginTop: "10%" }}
-      />
-      <Spinner animation="grow" />
-      <Spinner animation="grow" />
-    </div>
-  );
+    if (loading) {
+        return (
+            <div style={{ textAlign: "center", marginTop: "10%" }}>
+                <Spinner animation="grow" />
+                <Spinner animation="grow" />
+                <Spinner animation="grow" />
+            </div>
+        );
+    }
+
+    if (success) {
+        return (
+            <div style={{ textAlign: "center", marginTop: "10%" }}>
+                <Heading level={3}>Order Successful!</Heading>
+                <p>You will be redirected to the orders page in a few seconds...</p>
+            </div>
+        );
+    }
+
+    return null;
 };
 
 export default withAuthenticator(CheckOut);

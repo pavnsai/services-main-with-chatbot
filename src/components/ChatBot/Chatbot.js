@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Amplify, Interactions } from 'aws-amplify';
-import awsconfig from '../aws-exports';
+import awsconfig from '../../aws-exports';
 
-import './Chatbot.css';
+import './Chatbot.scss';
 
 Amplify.configure(awsconfig);
 
@@ -37,53 +37,31 @@ function Chatbotfunction(props) {
         <div className="chatbot-container">
             <div className="chatbot-header">
                 <h2>EasyBot</h2>
-                <span className="close" onClick={props.onClose}>
+                <span className="close-button" onClick={props.onClose}>
                     &times;
                 </span>
             </div>
             <div className="chatbot-messages">
                 {messages.map((message, index) => (
-                    <div className={`message ${message.from}`} key={index}>
-                        {message.text}
-                    </div>
+                    <div
+                    className={`message ${message.from} ${message.loading ? 'loading' : ''}`}
+                key={index}
+            >
+                {message.text}
+            </div>
                 ))}
                 <div ref={messagesEndRef} />
             </div>
-            <form onSubmit={sendMessage}>
+            <form onSubmit={sendMessage} className="chatbot-form">
                 <input
                     type="text"
                     placeholder="Type your message..."
                     value={inputText}
+                    className="chatbot-input"
                     onChange={(event) => setInputText(event.target.value)}
                 />
-                <button type="submit">Send</button>
+                <button type="submit" className="chatbot-submit-button">Send</button>
             </form>
-            <style>
-                {`
-          form {
-            display: flex;
-            align-items: center;
-            padding: 16px;
-          }
-
-          input[type="text"] {
-            flex: 1;
-            padding: 8px;
-            border: none;
-            border-radius: 4px;
-            margin-right: 8px;
-          }
-
-          button[type="submit"] {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            padding: 8px;
-            cursor: pointer;
-          }
-        `}
-            </style>
         </div>
     );
 }
