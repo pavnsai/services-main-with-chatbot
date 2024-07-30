@@ -1,44 +1,48 @@
 import './App.css';
 import Header from './components/Header/Header';
-import { BrowserRouter, Route } from 'react-router-dom';
-import Home from './components/Home';
-import Cart from './components/Cart';
-import ServicePage from './components/ServicePage';
+import {BrowserRouter, Route} from 'react-router-dom';
+import Home from './components/Home/Home';
+import Cart from './components/Cart/Cart';
+import Services from './components/Services/Services';
 import React from 'react';
 import '@aws-amplify/ui-react/styles.css';
 import awsconfig from './aws-exports';
-import { Amplify, Auth, API, graphqlOperation } from 'aws-amplify';
+import {Amplify, Auth, API, graphqlOperation} from 'aws-amplify';
 import CheckOut from './components/CheckOut';
 import DummySignInPage from './components/DummySignInPage';
-import Orders from './components/Orders';
+import Orders from './components/Orders/Orders';
 import ChatbotButton from './ChatButton';
+import FreelanceProMarket from "./components/About/FreelanceProMarket";
 
 Amplify.configure(awsconfig);
 
 function App() {
     return (
         <BrowserRouter>
-            <Header />
+            <Header/>
             <div className="App">
+                <Route path="/services" exact>
+                    <Services/>
+                </Route>
                 <Route path="/" exact>
-                    <ServicePage />
+                    <FreelanceProMarket/>
                 </Route>
                 <Route path="/home" exact>
-                    <Home />
+                    <Home/>
                 </Route>
                 <Route path="/cart">
-                    <Cart />
+                    <Cart/>
                 </Route>
                 <Route path="/checkout">
-                    <CheckOut />
+                    <CheckOut/>
                 </Route>
                 <Route path="/orders">
-                    <Orders />
+                    <Orders/>
                 </Route>
                 <Route path="/login">
-                    <DummySignInPage />
+                    <DummySignInPage/>
                 </Route>
-                <ChatbotButton />
+                <ChatbotButton/>
             </div>
         </BrowserRouter>
     );

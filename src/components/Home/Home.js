@@ -1,10 +1,10 @@
-import { CartState } from '../context/Context';
-import Filters from './Filters';
-import SingleProduct from './SingleProduct';
+import { CartState } from '../../context/Context';
+import Filters from '../Filters/Filters';
+import SingleProduct from '../Professionals/SingleProduct';
 import { useHistory, useLocation } from 'react-router-dom';
-import Model from './Model';
+import Modal from '../Modal/Model';
 import { useState } from 'react';
-// header.tsx
+import './Home.scss';
 
 const Home = () => {
     const {
@@ -17,7 +17,6 @@ const Home = () => {
     const [modalData, setmodalData] = useState({});
     const transformProducts = () => {
         let sortedProducts = products;
-
         if (sort) {
             sortedProducts = sortedProducts.sort((a, b) =>
                 sort === 'lowToHigh' ? a.price - b.price : b.price - a.price
@@ -37,10 +36,9 @@ const Home = () => {
                 (prod) => prod.ratings >= byRating
             );
         }
-
         if (searchQuery) {
             sortedProducts = sortedProducts.filter((prod) =>
-                prod.name.toLowerCase().includes(searchQuery)
+                prod.name.toLowerCase().includes(searchQuery.toLowerCase())
             );
         }
         if (prop) {
@@ -59,22 +57,28 @@ const Home = () => {
     };
     return (
         <div className="home">
-            <Filters />
-            <div className="productContainer">
-                {transformProducts().map((prod) => (
-                    <SingleProduct
-                        prod={prod}
-                        key={prod.id}
-                        onClickFunction={(data) => handleClick(data)}
-                    />
-                ))}
-                {modalOpen && (
-                    <Model
-                        status={modalOpen}
-                        handleClick={handleClickfromModal}
-                        prod={modalData}
-                    />
-                )}
+            <div className="home-container">
+                <aside className="filters-sidebar">
+                    <Filters />
+                </aside>
+                <main className="products-main">
+                    <div className="product-grid">
+                        {transformProducts().map((prod) => (
+                            <SingleProduct
+                                prod={prod}
+                                key={prod.id}
+                                onClickFunction={(data) => handleClick(data)}
+                            />
+                        ))}
+                    </div>
+                    {modalOpen && (
+                        <Modal
+                            status={modalOpen}
+                            handleClick={handleClickfromModal}
+                            prod={modalData}
+                        />
+                    )}
+                </main>
             </div>
         </div>
     );

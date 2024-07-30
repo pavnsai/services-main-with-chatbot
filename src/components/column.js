@@ -127,8 +127,8 @@ export const ORDER_COLUMNS = [
     },
   },
   {
-    Header: "Type Of Service",
-    Footer: "Type Of Service",
+    Header: "Type Of Services",
+    Footer: "Type Of Services",
     accessor: "jsonData.typeOfService",
     // Cell: ({ value }) => {
     //   let jsonData = JSON.parse(value);

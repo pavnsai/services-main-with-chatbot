@@ -1,4 +1,5 @@
-import { FaShoppingCart } from 'react-icons/fa';
+import React, { useEffect, useState } from 'react';
+import { FaShoppingCart,FaBars } from 'react-icons/fa';
 import { AiFillDelete } from 'react-icons/ai';
 import { BsFillCloudDownloadFill } from 'react-icons/bs';
 import {
@@ -10,12 +11,11 @@ import {
     Nav,
     Navbar,
 } from 'react-bootstrap';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 import { CartState } from '../../context/Context';
-import './Header.css';
 import { Auth } from 'aws-amplify';
-import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import './Header.scss';
+import {useCleanup} from "../Utils/CleanupContext";
 
 const Header = () => {
     const {
@@ -24,169 +24,102 @@ const Header = () => {
         productDispatch,
     } = CartState();
     const history = useHistory();
-    const [loggedIn, setloggedIn] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(false);
+    const location = useLocation();
+    const { cleanup } = useCleanup();
+    const handleNavigation = () => {
+        cleanup();
+    };
     useEffect(() => {
-        setloggedIn(isLogin);
+        setLoggedIn(isLogin);
     }, [isLogin]);
+
     async function signOut() {
         try {
             await Auth.signOut();
-            setloggedIn(false);
-            dispatch({
-                type: 'CHANGE_LOGIN',
-                payload: {
-                    state: false,
-                },
-            });
-            dispatch({
-                type: 'CHANGE_USERNAME',
-                payload: {
-                    userName: '',
-                },
-            });
-            history.push({
-                pathname: '/',
-            });
+            setLoggedIn(false);
+            dispatch({ type: 'CHANGE_LOGIN', payload: { state: false } });
+            dispatch({ type: 'CHANGE_USERNAME', payload: { userName: '' } });
+            history.push('/');
         } catch (error) {
             console.log('error signing out: ', error);
         }
     }
+
+    const showSearch = !['cart','services', '','login', 'orders'].includes(location.pathname.split('/')[1]);
+
     return (
-        <Navbar bg="dark" variant="dark" style={{ height: 80 }}>
+        <Navbar bg="custom" variant="dark" expand="lg" className="header-navbar">
             <Container>
-                <Navbar.Brand>
-                    <BsFillCloudDownloadFill color="#7cfc00" fontSize="40px"  />
-                    <Link to="/">
-                        <span
-                            style={{
-                                fontFamily: 'Montserrat',
-                                fontWeight: 600,
-                                fontSize: '25px',
-                                color: '#7cfc00',
-                                marginLeft: '10px'
-                            }}
-                        >
-                            Freelancepromarket
-                        </span>
-                    </Link>
+                <Navbar.Brand as={Link} to="/" className="brand" style={{ marginLeft: 0 }}>
+                    <BsFillCloudDownloadFill className="brand-icon" />
+                    <span className="brand-name">Freelancepromarket</span>
                 </Navbar.Brand>
-
-                <Navbar.Brand>
-                    <Link to="/">Home</Link>
-                </Navbar.Brand>
-
-                {!['cart', '', 'orders'].includes(
-                    useLocation().pathname.split('/')[1]
-                ) && (
-                    <Navbar.Text className="search">
+                <Navbar.Toggle aria-controls="basic-navbar-nav" className="custom-toggler">
+                    <FaBars className="hamburger-icon" />
+                </Navbar.Toggle>
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="me-auto">
+                        <Nav.Link as={Link} to="/services" onClick={() => handleNavigation()} className={location.pathname === '/services' ? 'active' : ''}>Services</Nav.Link>
+                        <Nav.Link as={Link} to="/orders" onClick={() => handleNavigation()} className={location.pathname === '/orders' ? 'active' : ''}>Orders</Nav.Link>
+                    </Nav>
+                    {showSearch && (
                         <FormControl
-                            style={{ width: 350 }}
                             type="search"
                             placeholder="Search a professional..."
-                            className="m-auto"
+                            className="search-input"
                             aria-label="Search"
-                            onChange={(e) => {
-                                productDispatch({
-                                    type: 'FILTER_BY_SEARCH',
-                                    payload: e.target.value,
-                                });
-                            }}
+                            onChange={(e) => productDispatch({
+                                type: 'FILTER_BY_SEARCH',
+                                payload: e.target.value,
+                            })}
                         />
-                    </Navbar.Text>
-                )}
-
-                <Navbar.Brand>
-                    <Link to="/orders">Orders</Link>
-                </Navbar.Brand>
-
-                <Navbar.Brand>
-                    {' '}
-                    {loggedIn ? (
-                        <Link onClick={signOut}>
-                            <div>
-                                <Button
-                                    style={{ width: '95%', margin: '0 10px' }}
-                                    variant="danger"
-                                >
-                                    Logout
-                                </Button>
-                                {/* <RiLogoutCircleRFill color="white" fontSize="40px" /> Logout */}
-                            </div>
-                        </Link>
-                    ) : (
-                        <Link to="/login">
-                            <div>
-                                <Button
-                                    style={{ width: '95%', margin: '0 10px' }}
-                                    variant="success"
-                                >
-                                    Login
-                                </Button>
-                            </div>
-                        </Link>
                     )}
-                </Navbar.Brand>
-                <Nav>
-                    <Dropdown>
-                        <Dropdown.Toggle variant="warning">
-                            <FaShoppingCart color="white" fontSize="25px" />
-                            <Badge>{cart.length}</Badge>
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu style={{ minWidth: 370 }}>
-                            {cart.length > 0 ? (
-                                <>
-                                    {cart.map((prod) => (
-                                        <span
-                                            className="cartitem"
-                                            key={prod.id}
-                                        >
-                                            <img
-                                                src={prod.image}
-                                                className="cartItemImg"
-                                                alt={prod.name}
-                                            />
-                                            <div className="cartItemDetail">
-                                                <span>{prod.name}</span>
-                                                <span>
-                                                    $ {prod.price.split('.')[0]}
-                                                </span>
-                                            </div>
-                                            <div className="cartItemDetail2">
-                                                <AiFillDelete
-                                                    fontSize="20px"
-                                                    style={{
-                                                        cursor: 'pointer',
-                                                    }}
-                                                    onClick={() =>
-                                                        dispatch({
-                                                            type: 'REMOVE_FROM_CART',
-                                                            payload: prod,
-                                                        })
-                                                    }
-                                                />{' '}
-                                            </div>
-                                        </span>
-                                    ))}
-                                    <Link to="/cart">
-                                        <Button
-                                            style={{
-                                                width: '95%',
-                                                margin: '0 10px',
-                                            }}
-                                        >
-                                            Go To Cart
-                                        </Button>
-                                    </Link>
-                                </>
+                    <Nav className="ms-auto">
+                        <div className="d-flex align-items-center">
+                            {loggedIn ? (
+                                <Button variant="outline-danger" onClick={signOut}>Logout</Button>
                             ) : (
-                                <span style={{ padding: 10 }}>
-                                    Cart is Empty!
-                                </span>
+                                <Button as={Link} to="/login" onClick={() => handleNavigation()} variant="outline-success">Login</Button>
                             )}
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </Nav>
+                            <Dropdown align="end" className="cart-dropdown">
+                                <Dropdown.Toggle id="dropdown-cart">
+                                    <FaShoppingCart/>
+                                    <Badge bg="secondary">{cart.length}</Badge>
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    {cart.length > 0 ? (
+                                        <>
+                                            {cart.map((prod) => (
+                                                <Dropdown.Item key={prod.id} className="cart-item">
+                                                    <img src={prod.image} alt={prod.name} className="cart-item-img"/>
+                                                    <span className="cart-item-name">{prod.name}</span>
+                                                    <span className="cart-item-price">${prod.price.split('.')[0]}</span>
+                                                    <AiFillDelete
+                                                        className="cart-item-delete"
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            dispatch({
+                                                                type: 'REMOVE_FROM_CART',
+                                                                payload: prod,
+                                                            });
+                                                        }}
+                                                    />
+                                                </Dropdown.Item>
+                                            ))}
+                                            <Dropdown.Divider/>
+                                            <Dropdown.Item as={Link} to="/cart" className="text-center">
+                                                <Button variant="primary" block>Go To Cart</Button>
+                                            </Dropdown.Item>
+                                        </>
+                                    ) : (
+                                        <Dropdown.Item>Cart is Empty!</Dropdown.Item>
+                                    )}
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        </div>
+                    </Nav>
+                </Navbar.Collapse>
             </Container>
         </Navbar>
     );
