@@ -9,7 +9,7 @@ import '@aws-amplify/ui-react/styles.css';
 import awsconfig from './aws-exports';
 import {Amplify} from 'aws-amplify';
 import CheckOut from './components/Checkout/CheckOut';
-import DummySignInPage from './components/DummySignInPage';
+import AmplifySignInPage from './components/AmplifySignIn/AmplifySignInPage';
 import Orders from './components/Orders/Orders';
 import ChatbotButton from './components/ChatBot/ChatButton';
 import FreelanceProMarket from "./components/About/FreelanceProMarket";
@@ -40,7 +40,7 @@ function App() {
                     <Orders/>
                 </Route>
                 <Route path="/login">
-                    <DummySignInPage/>
+                    <AmplifySignInPage/>
                 </Route>
                 <ChatbotButton/>
             </div>

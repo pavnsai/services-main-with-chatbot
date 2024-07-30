@@ -47,7 +47,7 @@ const FreelanceProMarket = () => {
             const numCards = cards.length;
             const cardHeight = 200;
             const cardGap = 30;
-            const visibleHeight = 70;
+            const visibleHeight = 60;
             const totalHeight = (cardHeight + cardGap) * numCards;
 
             gsap.set(cards, {
@@ -208,7 +208,6 @@ const FreelanceProMarket = () => {
                             }
                         ].map((item, index) => (
                             <div key={index} className="architecture-card">
-                                {/*<item.icon className="arch-icon"/>*/}
                                 <h3><item.icon className="arch-icon"/>
                                     {item.title}</h3>
                                 <p>{item.description}</p>

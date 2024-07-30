@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FaShoppingCart,FaBars } from 'react-icons/fa';
+import { FaShoppingCart, FaBars } from 'react-icons/fa';
 import { AiFillDelete } from 'react-icons/ai';
 import { BsFillCloudDownloadFill } from 'react-icons/bs';
 import {
@@ -10,12 +10,13 @@ import {
     FormControl,
     Nav,
     Navbar,
+    Spinner
 } from 'react-bootstrap';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import { CartState } from '../../context/Context';
 import { Auth } from 'aws-amplify';
 import './Header.scss';
-import {useCleanup} from "../Utils/CleanupContext";
+import { useCleanup } from "../Utils/CleanupContext";
 
 const Header = () => {
     const {
@@ -26,13 +27,16 @@ const Header = () => {
     const history = useHistory();
     const [loggedIn, setLoggedIn] = useState(false);
     const location = useLocation();
+    const [isLoading, setIsLoading] = useState(false);
     const { cleanup } = useCleanup();
-    const handleNavigation = () => {
-        cleanup();
-    };
+
     useEffect(() => {
         setLoggedIn(isLogin);
     }, [isLogin]);
+
+    const handleNavigation = () => {
+        cleanup();
+    };
 
     async function signOut() {
         try {
@@ -42,14 +46,30 @@ const Header = () => {
             dispatch({ type: 'CHANGE_USERNAME', payload: { userName: '' } });
             history.push('/');
         } catch (error) {
-            console.error('error signing out: ', error);
+            console.error('Error signing out: ', error);
         }
     }
 
-    const showSearch = !['cart','services', '','login', 'orders'].includes(location.pathname.split('/')[1]);
+    async function handleGuestLogin() {
+        cleanup();
+        setIsLoading(true);
+        try {
+            const user = await Auth.signIn("Pavan", "Pavan123");
+            dispatch({ type: 'CHANGE_LOGIN', payload: { state: true } });
+            dispatch({ type: 'CHANGE_USERNAME', payload: { userName: user.username } });
+            setLoggedIn(true);
+            // history.push('/services');
+        } catch (error) {
+            console.error('Error signing in as guest:', error);
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
+    const showSearch = !['cart', 'services', '', 'login', 'orders'].includes(location.pathname.split('/')[1]);
 
     return (
-        <Navbar bg="custom" variant="dark" expand="lg" className="header-navbar">
+        <Navbar expand="lg" className="header-navbar">
             <Container>
                 <Navbar.Brand as={Link} to="/" className="brand" style={{ marginLeft: 0 }}>
                     <BsFillCloudDownloadFill className="brand-icon" />
@@ -60,8 +80,8 @@ const Header = () => {
                 </Navbar.Toggle>
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link as={Link} to="/services" onClick={() => handleNavigation()} className={location.pathname === '/services' ? 'active' : ''}>Services</Nav.Link>
-                        <Nav.Link as={Link} to="/orders" onClick={() => handleNavigation()} className={location.pathname === '/orders' ? 'active' : ''}>Orders</Nav.Link>
+                        <Nav.Link as={Link} to="/services" onClick={handleNavigation} className={location.pathname === '/services' ? 'active' : ''}>Services</Nav.Link>
+                        <Nav.Link as={Link} to="/orders" onClick={handleNavigation} className={location.pathname === '/orders' ? 'active' : ''}>Orders</Nav.Link>
                     </Nav>
                     {showSearch && (
                         <FormControl
@@ -80,11 +100,26 @@ const Header = () => {
                             {loggedIn ? (
                                 <Button variant="outline-danger" onClick={signOut}>Logout</Button>
                             ) : (
-                                <Button as={Link} to="/login" onClick={() => handleNavigation()} variant="outline-success">Login</Button>
+                                <>
+                                    <Button onClick={handleGuestLogin} variant="outline-success" disabled={isLoading}>
+                                        {isLoading ? (
+                                            <Spinner
+                                                as="span"
+                                                animation="border"
+                                                size="sm"
+                                                role="status"
+                                                aria-hidden="true"
+                                            />
+                                        ) : (
+                                            <span>Guest</span>
+                                        )}
+                                    </Button>
+                                    <Button as={Link} to="/login" onClick={handleNavigation} variant="outline-success">Login</Button>
+                                </>
                             )}
                             <Dropdown align="end" className="cart-dropdown">
                                 <Dropdown.Toggle id="dropdown-cart">
-                                    <FaShoppingCart/>
+                                    <FaShoppingCart className="shopping-cart-class"/>
                                     <Badge bg="secondary">{cart.length}</Badge>
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
@@ -108,7 +143,7 @@ const Header = () => {
                                                 </Dropdown.Item>
                                             ))}
                                             <Dropdown.Divider/>
-                                            <Dropdown.Item as={Link} onClick={() => handleNavigation()} to="/cart" className="text-center">
+                                            <Dropdown.Item as={Link} onClick={handleNavigation} to="/cart" className="text-center">
                                                 <Button variant="primary" block>Go To Cart</Button>
                                             </Dropdown.Item>
                                         </>
